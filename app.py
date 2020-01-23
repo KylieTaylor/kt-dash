@@ -3,13 +3,14 @@ import os
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import flask
+from flask import Flask
+server = Flask('my app')
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server = server)
 
-server = app.server
+#server = app.server
 
 app.layout = html.Div([
     html.H2('Hello World'),
@@ -27,4 +28,4 @@ def display_value(value):
     return 'You have selected "{}"'.format(value)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.server.run(debug=True)
